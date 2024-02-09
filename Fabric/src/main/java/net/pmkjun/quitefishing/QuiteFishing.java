@@ -4,6 +4,7 @@ import net.pmkjun.quitefishing.input.KeyMappings;
 import com.mojang.logging.LogUtils;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 
 public class QuiteFishing implements ModInitializer {
 

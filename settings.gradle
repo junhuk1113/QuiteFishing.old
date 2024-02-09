@@ -26,5 +26,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = "dungeonhelper-${minecraftVersion}"
+rootProject.name = "quitefishing-${minecraftVersion}"
 include('Common', 'Fabric', 'Forge')
