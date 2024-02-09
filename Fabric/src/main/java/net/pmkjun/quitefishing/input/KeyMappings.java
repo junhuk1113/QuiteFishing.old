@@ -1,40 +1,31 @@
 package net.pmkjun.quitefishing.input;
 
-import net.pmkjun.quitefishing.QuiteFishingClient;
-import com.mojang.blaze3d.platform.InputConstants;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.option.KeyBinding;
+import net.pmkjun.quitefishing.QuiteFishingClient;
 
 public class KeyMappings implements IKeyMappings {
+        public static KeyBinding openSettingScreen = new KeyBinding("fishhelper.key.open_settings", 74, "fishhelper.key.category");
 
-    public static KeyMapping openSettingScreen = new KeyMapping(
-            "key.dungeonhelper.open_dungeonhelper_settings",
-            InputConstants.KEY_M,
-            "key.dungeonhelper.category");
-
-
-    @Override
     public void register() {
-        Minecraft mc = Minecraft.getInstance();
+        MinecraftClient mc = MinecraftClient.getInstance();
         QuiteFishingClient client = QuiteFishingClient.getInstance();
-
-        //register(openSettingScreen, () -> mc.setScreen(client.getSettingsScreen()));
+        //register(openSettingScreen, () -> mc.setScreen((Screen)new ConfigScreen(mc.currentScreen)));
     }
 
-    private void register(KeyMapping keyMapping, KeyBehavior behavior) {
+    private void register(KeyBinding keyMapping, KeyBehavior behavior) {
         keyMapping = KeyBindingHelper.registerKeyBinding(keyMapping);
-
-        KeyMapping finalKeyMapping = keyMapping;
+        KeyBinding finalKeyMapping = keyMapping;
         ClientTickEvents.END_CLIENT_TICK.register(m -> {
-            while(finalKeyMapping.consumeClick()) {
+            while (finalKeyMapping.wasPressed())
                 behavior.action();
-            }
         });
     }
 
-    interface KeyBehavior {
+    static interface KeyBehavior {
         void action();
     }
 }
