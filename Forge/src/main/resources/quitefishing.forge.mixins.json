@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.pmkjun.quitefishing.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "quitefishing.mixin.refmap.json",
+  "server": [
+  ],
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}
